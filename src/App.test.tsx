@@ -1,61 +1,39 @@
-import React, {FC} from 'react';
-import './App.css';
-import { useState } from 'react';
+import { render, screen } from '@testing-library/react';
+import MenuSection from "./components/MenuSection";
 import CreditCardSection from './components/CreditCardSection';
-import MenuSection from './components/MenuSection';
 import {CreditCardInfoState} from './model'
-import { connect } from 'react-redux'
-import {CARD_INFO_ACTION_TYPES} from "./actions/CardInfo"
 
-interface AppProps {
-  creditCardInfo:CreditCardInfoState;
-  updateField:any;
-  validateField:any;
-}
+test('renders menu section', () => {
+  const quitSection = (section:string)=>{console.log(section);}
+  render(<MenuSection onQuit={quitSection}/>);
+  const linkElement = screen.getByText(/This is menu content/i);
+  expect(linkElement).toBeInTheDocument();
+});
 
-const App: FC<AppProps> = props => {
-
-  const [pageModal, setPageModal] = useState("creditcard");
-
-  const quitSection = (section:string) =>{
-    if(section === "creditcard"){
-      setPageModal("menu")
-    }else{
-      setPageModal("creditcard")
-    }        
+test('renders credit card section', () => {
+  const quitSection = (section:string)=>{console.log(section);}
+  const onUpdate=(key:string, value:string)=>{console.log(key);} 
+  const onValid=(key:string)=>{console.log(key);} 
+  const creditCardInfo:CreditCardInfoState={
+    cardValidInfo:{
+      expiredDate:true,
+      name:true,
+      cvc:true,
+      cardNumber:true
+    },
+    cardInfo:{
+      expiredDate: "02/2024",
+      name: "test test",
+      cvc: "123",
+      cardNumber:"4111111111111111"
+    }
   }
-
-  return (
-    <div className="App">
-        { pageModal === "creditcard" && (
-          <CreditCardSection 
-            onQuit={quitSection} 
-            onUpdate={props.updateField} 
-            onValid={props.validateField}
-            creditCardInfo={props.creditCardInfo}
-          />
-        )}
-        { pageModal === "menu" && (
-          <MenuSection onQuit={quitSection}/>
-        )}
-    </div>
-  );
-}
-
-const mapStateToProps = (state:any) => {
-  const creditCardInfo = state.CreditCardInfo;
-  return { creditCardInfo}
-}
-
-const mapDispatchToProps = (dispatch:any) => ({
-  updateField: (key:string, value:string)=>dispatch({
-      type:CARD_INFO_ACTION_TYPES.SET_CREDIT_CARD_INFO,
-      payload:{key, value}
-  }),
-  validateField: (key:string)=>dispatch({
-    type:CARD_INFO_ACTION_TYPES.VALIDATE_CREDIT_CARD_INFO,
-    payload:{key}
-})
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+  render(<CreditCardSection 
+    onQuit={quitSection}
+    onUpdate={onUpdate}
+    onValid={onValid}
+    creditCardInfo={creditCardInfo}
+  />);
+  const linkElement = screen.getByText("submit");
+  expect(linkElement).toBeEnabled();
+});
