@@ -10,6 +10,11 @@ interface CreditCardSectionProps {
   creditCardInfo: CreditCardInfoState;
 }
 
+/**
+ * credit card input form component.
+ * submit function not implemented
+ * no card name input
+ */
 const CreditCardSection: FC<CreditCardSectionProps> = props => {
 
   const cardInfo:CardInfo = props.creditCardInfo.cardInfo;

@@ -6,6 +6,10 @@ interface MenuSectionProps {
   onQuit: (s:string) => void;
 }
 
+/**
+ * menu component.
+ * no function implemented here
+ */
 const MenuSection:FC<MenuSectionProps> = props => {
     return (
       <Container className="container">
