@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
-
+import 'bootstrap/dist/css/bootstrap.min.css'
 import configureStore from "./store/configureStore"
 
 const store = configureStore()

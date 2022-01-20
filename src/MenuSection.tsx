@@ -1,6 +1,6 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import logo from './back.svg'
-import {Card, Button, CardHeader, CardBody, CardText, CardImg} from "reactstrap"
+import {Container, Row, Col, CardText, CardImg} from "reactstrap"
 
 interface MenuSectionProps {
   onQuit: any;
@@ -8,15 +8,21 @@ interface MenuSectionProps {
 
 const MenuSection:FC<MenuSectionProps> = props => {
     return (
-      <Card>
-        <CardHeader>
-          <CardImg width={50} src={logo} onClick={()=>{props.onQuit("menu")}}/>
-          <CardText>Menu</CardText>
-        </CardHeader>  
-        <CardBody>
-          <p>This is menu content</p>
-        </CardBody>  
-      </Card>
+      <Container className="container">
+        <Row className="section-header">
+          <CardImg className='section-icon position-absolute top-0 start-0'src={logo} onClick={()=>{props.onQuit("menu")}}/>
+          <Col md={12} sm={12}>
+            <CardText>Menu</CardText>
+          </Col>
+        </Row>
+        <Row className='section-body'>
+          <Col md={12} sm={12}>
+            <Row className='p-2, align-items-center, justify-content-center section-content'>
+              <div>This is menu content</div>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 
