@@ -1,18 +1,21 @@
+import React, {FC} from 'react';
 import './App.css';
 import { useState } from 'react';
 import CreditCardSection from './CreditCardSection';
 import MenuSection from './MenuSection';
-import {CardInfo} from './model'
+import {CreditCardInfoState} from './model'
+import { connect } from 'react-redux'
+import {CARD_INFO_ACTION_TYPES} from "./actions/CardInfo"
 
-function App() {
+interface AppProps {
+  creditCardInfo:CreditCardInfoState;
+  updateField:any;
+  validateField:any;
+}
+
+const App: FC<AppProps> = props => {
 
   const [pageModal, setPageModal] = useState("creditcard");
-  const cardInfo:CardInfo = {
-    expiredDate:"test",
-    name:"tt",
-    cardNumber:"134123411341",
-    cvc:"133"
-  }
 
   const quitSection = (section:string) =>{
     if(section === "creditcard"){
@@ -25,15 +28,34 @@ function App() {
   return (
     <div className="App">
         { pageModal === "creditcard" && (
-          <CreditCardSection onQuit={quitSection} cardInfo={cardInfo}/>
+          <CreditCardSection 
+            onQuit={quitSection} 
+            onUpdate={props.updateField} 
+            onValid={props.validateField}
+            creditCardInfo={props.creditCardInfo}
+          />
         )}
         { pageModal === "menu" && (
           <MenuSection onQuit={quitSection}/>
         )}
-
-        
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state:any) => {
+  const creditCardInfo = state.CreditCardInfo;
+  return { creditCardInfo }
+}
+
+const mapDispatchToProps = (dispatch:any) => ({
+  updateField: (key:string, value:string)=>dispatch({
+      type:CARD_INFO_ACTION_TYPES.SET_CREDIT_CARD_INFO,
+      payload:{key, value}
+  }),
+  validateField: (key:string)=>dispatch({
+    type:CARD_INFO_ACTION_TYPES.VALIDATE_CREDIT_CARD_INFO,
+    payload:{key}
+  })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

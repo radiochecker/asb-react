@@ -4,3 +4,15 @@ export interface CardInfo {
     expiredDate:string,
     cvc:string
 }
+
+export interface CardValidInfo {
+    cardNumber: boolean,
+    name: boolean,
+    expiredDate:boolean,
+    cvc:boolean
+}
+
+export interface CreditCardInfoState {
+    cardInfo:CardInfo,
+    cardValidInfo:CardValidInfo
+}

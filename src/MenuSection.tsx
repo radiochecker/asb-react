@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import logo from './back.svg'
-import {Card, CardHeader, CardBody, CardText, CardImg} from "reactstrap"
+import {Card, Button, CardHeader, CardBody, CardText, CardImg} from "reactstrap"
 
 interface MenuSectionProps {
   onQuit: any;
