@@ -1,9 +1,9 @@
 import {FC} from 'react';
-import logo from './back.svg'
+import logo from '../back.svg'
 import {Container, Row, Col, CardText, CardImg} from "reactstrap"
 
 interface MenuSectionProps {
-  onQuit: any;
+  onQuit: (s:string) => void;
 }
 
 const MenuSection:FC<MenuSectionProps> = props => {

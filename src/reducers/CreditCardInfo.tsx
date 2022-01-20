@@ -3,7 +3,7 @@ import {CreditCardInfoState} from "../model"
 
 const init_state:CreditCardInfoState = {
     cardInfo:{
-      expiredDate:"121",
+      expiredDate:"",
       name:"",
       cardNumber:"",
       cvc:""

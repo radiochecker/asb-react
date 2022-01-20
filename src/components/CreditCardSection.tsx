@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
 import {Button, Container, CardImg, CardText, Row, Input, Col} from "reactstrap";
-import {CreditCardInfoState, CardInfo, CardValidInfo} from "./model";
-import logo from "./burger.svg";
+import {CreditCardInfoState, CardInfo, CardValidInfo} from "../model";
+import logo from "../burger.svg";
 
 interface CreditCardSectionProps {
-  onQuit: any;
-  onUpdate: any;
-  onValid: any;
+  onQuit: (s:string) => void;
+  onUpdate: (key:string, v:string) => void;
+  onValid: (key:string) => void;
   creditCardInfo: CreditCardInfoState;
 }
 

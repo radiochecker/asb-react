@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import './App.css';
 import { useState } from 'react';
-import CreditCardSection from './CreditCardSection';
-import MenuSection from './MenuSection';
+import CreditCardSection from './components/CreditCardSection';
+import MenuSection from './components/MenuSection';
 import {CreditCardInfoState} from './model'
 import { connect } from 'react-redux'
 import {CARD_INFO_ACTION_TYPES} from "./actions/CardInfo"
