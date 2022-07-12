@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Button, Container, CardImg, CardText, Row, Input, Col} from "reactstrap";
 import {CreditCardInfoState, CardInfo, CardValidInfo} from "../model";
 import logo from "../burger.svg";
-
+import {SECTION_TYPE} from "../types"
 interface CreditCardSectionProps {
   onQuit: (s:string) => void;
   onUpdate: (key:string, v:string) => void;
@@ -26,7 +26,7 @@ const CreditCardSection: FC<CreditCardSectionProps> = props => {
   return (
     <Container className="container">
       <Row className="section-header">
-        <CardImg className='section-icon position-absolute top-0 start-0'src={logo} onClick={()=>{props.onQuit("creditcard")}}/>
+        <CardImg className='section-icon position-absolute top-0 start-0'src={logo} onClick={()=>{props.onQuit(SECTION_TYPE.CREDIT_CARD)}}/>
         <Col md={12} sm={12}>
           <CardText>Register Card Form</CardText>
         </Col>
@@ -62,7 +62,7 @@ const CreditCardSection: FC<CreditCardSectionProps> = props => {
                 <Col md={3} sm={12}>
                   <Input value={cardInfo.expiredDate} 
                     onBlur={e=>{props.onValid("expiredDate")}}
-                    placeholder='Expiry'
+                    placeholder='Expiry mm/yy'
                     onChange={e=>{props.onUpdate("expiredDate",e.target.value)}}
                   />
                   {!validInfo.expiredDate && (

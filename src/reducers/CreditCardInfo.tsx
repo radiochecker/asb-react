@@ -1,5 +1,5 @@
-import { CARD_INFO_ACTION_TYPES } from '../actions/CardInfo'
-import {CreditCardInfoState} from "../model"
+import {CARD_INFO_ACTION_TYPES } from '../actions/CardInfo'
+import {CardInfo, CreditCardInfoState, Payload} from "../model"
 
 const init_state:CreditCardInfoState = {
     cardInfo:{
@@ -17,13 +17,13 @@ const init_state:CreditCardInfoState = {
 }
 
 const validMap:any = {
-  expiredDate:"^(0[1-9]|1[0-2])/?([0-9]{4}|[0-9]{2})$", 
+  expiredDate:"^(0[1-9]|1[0-2])/([0-9]{4}|[0-9]{2})$", 
   name:"^[a-zA-Z]+ [a-zA-Z]+$",
   cardNumber:'^[0-9]{16}',
   cvc:"^[0-9]{3}"
 }
 
-const CreditCardInfo = (state = init_state, action:{type:string, payload:any}) => {
+const CreditCardInfo = (state:CreditCardInfoState = init_state, action:{type:string, payload:Payload}):CreditCardInfoState=> {
   switch (action.type) {
     case CARD_INFO_ACTION_TYPES.SET_CREDIT_CARD_INFO:
         return {
@@ -34,17 +34,13 @@ const CreditCardInfo = (state = init_state, action:{type:string, payload:any}) =
             }
         }
     case CARD_INFO_ACTION_TYPES.VALIDATE_CREDIT_CARD_INFO:
-        const validation = validMap[action.payload.key] || "";
-        let result = false
-        const value:string = (state.cardInfo as any)[action.payload.key];
-        if (value.match(validation)){
-          result = true
-        }
+        const validation = validMap[action.payload.key]
+        const value = (state.cardInfo as any)[action.payload.key]
         return {
             ...state,
             cardValidInfo:{
               ...state.cardValidInfo,
-              [action.payload.key]:result
+              [action.payload.key]:value.match(validation)
             }
         }
     default:

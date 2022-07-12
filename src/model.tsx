@@ -16,3 +16,8 @@ export interface CreditCardInfoState {
     cardInfo:CardInfo,
     cardValidInfo:CardValidInfo
 }
+
+export interface Payload {
+    key:string,
+    value:string
+}

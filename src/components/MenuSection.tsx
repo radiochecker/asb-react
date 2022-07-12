@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import logo from '../back.svg'
 import {Container, Row, Col, CardText, CardImg} from "reactstrap"
+import {SECTION_TYPE} from "../types"
 
 interface MenuSectionProps {
   onQuit: (s:string) => void;
@@ -14,7 +15,7 @@ const MenuSection:FC<MenuSectionProps> = props => {
     return (
       <Container className="container">
         <Row className="section-header">
-          <CardImg className='section-icon position-absolute top-0 start-0'src={logo} onClick={()=>{props.onQuit("menu")}}/>
+          <CardImg className='section-icon position-absolute top-0 start-0'src={logo} onClick={()=>{props.onQuit(SECTION_TYPE.MENU)}}/>
           <Col md={12} sm={12}>
             <CardText>Menu</CardText>
           </Col>

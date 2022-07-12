@@ -6,28 +6,29 @@ import MenuSection from './components/MenuSection';
 import {CreditCardInfoState} from './model'
 import { connect } from 'react-redux'
 import {CARD_INFO_ACTION_TYPES} from "./actions/CardInfo"
+import {SECTION_TYPE} from "./types"
 
 interface AppProps {
   creditCardInfo:CreditCardInfoState;
-  updateField:any;
-  validateField:any;
+  updateField:(key:string, value:string)=>{};
+  validateField:(key:string)=>{};
 }
 
 const App: FC<AppProps> = props => {
 
-  const [pageModal, setPageModal] = useState("creditcard");
+  const [pageModal, setPageModal] = useState(SECTION_TYPE.CREDIT_CARD);
 
   const quitSection = (section:string) =>{
-    if(section === "creditcard"){
-      setPageModal("menu")
+    if(section === SECTION_TYPE.CREDIT_CARD){
+      setPageModal(SECTION_TYPE.MENU)
     }else{
-      setPageModal("creditcard")
+      setPageModal(SECTION_TYPE.CREDIT_CARD)
     }        
   }
 
   return (
     <div className="App">
-        { pageModal === "creditcard" && (
+        { pageModal === SECTION_TYPE.CREDIT_CARD && (
           <CreditCardSection 
             onQuit={quitSection} 
             onUpdate={props.updateField} 
@@ -35,14 +36,14 @@ const App: FC<AppProps> = props => {
             creditCardInfo={props.creditCardInfo}
           />
         )}
-        { pageModal === "menu" && (
+        { pageModal === SECTION_TYPE.MENU && (
           <MenuSection onQuit={quitSection}/>
         )}
     </div>
   );
 }
 
-const mapStateToProps = (state:any) => {
+const mapStateToProps = (state:{CreditCardInfo:CreditCardInfoState}) => {
   const creditCardInfo = state.CreditCardInfo;
   return { creditCardInfo }
 }
