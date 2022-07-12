@@ -17,7 +17,7 @@ const init_state:CreditCardInfoState = {
 }
 
 const validMap:any = {
-  expiredDate:"^(0[1-9]|1[0-2])/?([0-9]{4}|[0-9]{2})$", //https://stackoverflow.com/questions/20430391/regular-expression-to-match-credit-card-expiration-date
+  expiredDate:"^(0[1-9]|1[0-2])/?([0-9]{4}|[0-9]{2})$", 
   name:"^[a-zA-Z]+ [a-zA-Z]+$",
   cardNumber:'^[0-9]{16}',
   cvc:"^[0-9]{3}"
